@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(new MaterialApp(
+    home: new ExampleApp(),
+  ));
+}
+
+class ExampleApp extends StatefulWidget {
+  @override
+  _State createState() => new _State();
+}
+
+class _State extends State<ExampleApp> {
+  String _defaultValue = 'Nothing Yet';
+
+  void _timerAction() => setState(
+    () => _defaultValue = new DateTime.now().toString()
+  );
+
+  List<Widget> toolTipsBody() {
+    List<Widget> list = List();
+    list.add(new Text(_defaultValue));
+    list.add(new IconButton(
+      icon: new Icon(Icons.timer),
+      onPressed: _timerAction,
+      tooltip: 'Click me',
+    ));
+    return list;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('Example App'),
+      ),
+      body: new Container(
+        padding: new EdgeInsets.all(32.0),
+        child: new Center(
+          child: new Column(
+            children: toolTipsBody(),
+          ),
+        ),
+      ),
+    );
+  }
+}
